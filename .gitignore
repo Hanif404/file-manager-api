@@ -83,7 +83,6 @@ web_modules/
 .cache
 .parcel-cache
 
-<<<<<<< HEAD
 # Next.js build output
 .next
 out
@@ -135,13 +134,3 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
-=======
-**/*.trace
-**/*.zip
-**/*.tar.gz
-**/*.tgz
-**/*.log
-package-lock.json
-**/*.bun
-/src/generated/prisma
->>>>>>> 0551217 (first commit)
