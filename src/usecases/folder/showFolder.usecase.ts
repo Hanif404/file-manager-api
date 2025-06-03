@@ -8,4 +8,8 @@ export class ShowFolderUseCase {
         const depth = String(parentLength._max.groupParent).split(',').length;
         return await this.folderRepo.findAll(depth);
     }
+
+    async findById(id: number) {
+        return await this.folderRepo.findById(id);
+    }
 }

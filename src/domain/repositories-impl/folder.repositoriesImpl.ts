@@ -5,7 +5,7 @@ import { Prisma, prisma } from "../../config/prisma";
 export class FolderRepositoriesImpl implements FolderRepositories {
     private generateNestedInclude(depth: number): Prisma.FolderInclude {
         if (depth <= 0) return { children: true };
-        
+
         return {
             children: {
                 include: this.generateNestedInclude(depth - 1)
@@ -33,7 +33,7 @@ export class FolderRepositoriesImpl implements FolderRepositories {
     }
 
     async findById(id: number): Promise<Folder | null> {
-        return await prisma.folder.findUnique({ where: { id } });
+        return await prisma.folder.findUnique({ where: { id }, include: { children: true, File: true }});
     }
 
     async findByParentId(id: number): Promise<any> {

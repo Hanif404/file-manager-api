@@ -1,21 +1,9 @@
 import { FileRepositories } from "../repositories/file.repositories";
 import { File } from "../entities/file.entities";
-import { prisma } from "../../config/prisma";
+import { Prisma, prisma } from "../../config/prisma";
 
 export class FileRepositoriesImpl implements FileRepositories {
     async findAll(): Promise<any> {
-        // {
-        //     where: {
-        //         parentFolderId: null
-        //     },
-        //     include: {
-        //         children: {
-        //             include: {
-        //                 children: true  // grandchildren
-        //             }
-        //         },
-        //     }
-        // }
         return await prisma.file.findMany()
     }
 
@@ -24,7 +12,11 @@ export class FileRepositoriesImpl implements FileRepositories {
     }
 
     async create(file: File): Promise<File> {
-        return await prisma.file.create({ data: file });
+        const payload: Prisma.FileUncheckedCreateInput = {
+            name: file.name,
+            folderId: file.folderId
+        };
+        return await prisma.file.create({ data: payload });
     }
 
     async delete(id: number): Promise<any> {

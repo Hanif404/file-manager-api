@@ -21,6 +21,21 @@ export default class Folder {
         );
     }
 
+    static async showIdFolder(context: any): Promise<any> {
+        const ctx = 'controller-folder-show'
+        const { params, error } = context;
+        const showFolderUseCase = new ShowFolderUseCase(new FolderRepositoriesImpl());
+        const result = await showFolderUseCase.findById(Number(params.id));
+        if (!result) {
+            return wrapper.response(ctx, context, error(ERROR_CODE.NOT_FOUND, 'not found folder'))
+        }
+        return wrapper.response(ctx, context, {
+            response: 'success show folder by id',
+            data: result
+        }
+        );
+    }
+
     static async createFolder(context: any) {
         const ctx = 'controller-folder-create'
         const { body, error } = context;
