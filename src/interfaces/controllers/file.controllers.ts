@@ -11,8 +11,6 @@ export default class File {
         const { body, error } = context;
         const createFolderUseCase = new CreateFileUseCase(new FileRepositoriesImpl(), new FolderRepositoriesImpl());
         const result = await createFolderUseCase.create(body);
-        console.log(result);
-        
         if (!result) {
             return wrapper.response(ctx, context, error(ERROR_CODE.INTERNAL_ERROR, 'failed create file'))
         }
